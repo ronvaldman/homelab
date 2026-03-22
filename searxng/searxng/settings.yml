@@ -1,0 +1,12 @@
+use_default_settings: true
+
+general:
+  instance_name: "Valnet"
+
+server:
+  secret_key: "replace-this-with-random"
+  limiter: false
+  image_proxy: true
+
+redis:
+  url: redis://redis:6379/0

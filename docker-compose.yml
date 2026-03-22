@@ -1,0 +1,67 @@
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - searxng
+    networks:
+      - homelab
+
+  coredns:
+    image: coredns/coredns:latest
+    container_name: coredns
+    restart: unless-stopped
+    command: -conf /Corefile
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - ./coredns/Corefile:/Corefile:ro
+    networks:
+      - homelab
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    command: redis-server --save 30 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    networks:
+      - homelab
+
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    restart: unless-stopped
+    depends_on:
+      - redis
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./searxng:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=http://10.0.0.234:8080/
+      - UWSGI_WORKERS=4
+      - UWSGI_THREADS=4
+      - REDIS_URL=redis://redis:6379/0
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
+  redis_data:

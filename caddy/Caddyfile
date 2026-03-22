@@ -1,0 +1,4 @@
+https://search.valnet {
+    tls internal
+    reverse_proxy searxng:8080
+}

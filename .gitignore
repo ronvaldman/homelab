@@ -1,0 +1,69 @@
+# =========================
+# Secrets & environment
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Certificates & keys
+# =========================
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+acme.json
+certificates/
+
+# =========================
+# Data / volumes
+# =========================
+data/
+db_data/
+postgres_data/
+redis_data/
+*.db
+*.sqlite
+*/data/
+*/db/
+*/storage/
+
+# =========================
+# Logs & temp
+# =========================
+*.log
+*.tmp
+*.cache
+*.bak
+
+# =========================
+# System files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Editors / IDE
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Docker overrides
+# =========================
+docker-compose.override.yml
+
+# =========================
+# Legacy configs
+# =========================
+_legacy/
+
+# =========================
+# Junk / archives
+# =========================
+*.zip
+*.tar
+*.gz
