@@ -60,6 +60,17 @@ services:
     networks:
       - homelab
 
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./services/uptime-kuma/data:/app/data
+    networks:
+      - homelab
+
 networks:
   homelab:
     driver: bridge

@@ -2,3 +2,8 @@ https://search.valnet {
     tls internal
     reverse_proxy searxng:8080
 }
+
+https://uptimekuma.valnet {
+    tls internal
+    reverse_proxy uptime-kuma:3001
+}

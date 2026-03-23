@@ -29,6 +29,11 @@ redis_data/
 */db/
 */storage/
 
+# Specific runtime data (explicit > implicit)
+services/uptime-kuma/data/
+services/caddy/data/
+services/caddy/config/
+
 # =========================
 # Logs & temp
 # =========================
@@ -57,13 +62,9 @@ Thumbs.db
 docker-compose.override.yml
 
 # =========================
-# Legacy configs
+# Legacy / junk
 # =========================
 _legacy/
-
-# =========================
-# Junk / archives
-# =========================
 *.zip
 *.tar
 *.gz
